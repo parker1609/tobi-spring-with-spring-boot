@@ -2,9 +2,12 @@ package com.codemcd.tobispringwithspringboot.dao;
 
 import com.codemcd.tobispringwithspringboot.domain.User;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
-public class UserDao {
+public abstract class UserDao {
 
     public void add(User user) throws ClassNotFoundException, SQLException {
         Connection c = getConnection();
@@ -42,8 +45,5 @@ public class UserDao {
         return user;
     }
 
-    private Connection getConnection() throws ClassNotFoundException, SQLException {
-        Class.forName("org.h2.Driver");
-        return DriverManager.getConnection("jdbc:h2:mem:test", "sa", "");
-    }
+    public abstract Connection getConnection() throws ClassNotFoundException, SQLException;
 }
