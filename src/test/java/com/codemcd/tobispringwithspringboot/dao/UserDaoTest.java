@@ -1,5 +1,7 @@
 package com.codemcd.tobispringwithspringboot.dao;
 
+import com.codemcd.tobispringwithspringboot.dao.user.UserDao;
+
 import java.sql.SQLException;
 
 public class UserDaoTest {

@@ -1,5 +1,6 @@
-package com.codemcd.tobispringwithspringboot.dao;
+package com.codemcd.tobispringwithspringboot.dao.user;
 
+import com.codemcd.tobispringwithspringboot.dao.ConnectionMaker;
 import com.codemcd.tobispringwithspringboot.domain.User;
 
 import java.sql.Connection;
@@ -8,14 +9,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserDao {
-    private ConnectionMaker ConnectionMaker;
+    private final ConnectionMaker connectionMaker;
 
     public UserDao(ConnectionMaker connectionMaker) {
-        this.ConnectionMaker = connectionMaker;
+        this.connectionMaker = connectionMaker;
     }
 
     public void add(User user) throws ClassNotFoundException, SQLException {
-        Connection c = ConnectionMaker.makeConnection();
+        Connection c = connectionMaker.makeConnection();
 
         PreparedStatement ps = c.prepareStatement(
                 "INSERT INTO users(id, name, password) VALUES (?, ?, ?)");
@@ -30,7 +31,7 @@ public class UserDao {
     }
 
     public User get(String id) throws ClassNotFoundException, SQLException {
-        Connection c = ConnectionMaker.makeConnection();
+        Connection c = connectionMaker.makeConnection();
 
         PreparedStatement ps = c.prepareStatement(
                 "SELECT * FROM users WHERE id = ?");
