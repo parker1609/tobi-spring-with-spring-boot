@@ -21,4 +21,14 @@ public class UserDaoTest {
         System.out.println(userDao1);
         System.out.println(userDao2);
     }
+
+    @Test
+    void list_1_21() {
+        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DaoFactory.class);
+        UserDao userDao1 = context.getBean("userDao", UserDao.class);
+        UserDao userDao2 = context.getBean("userDao", UserDao.class);
+
+        System.out.println(userDao1);
+        System.out.println(userDao2);
+    }
 }
