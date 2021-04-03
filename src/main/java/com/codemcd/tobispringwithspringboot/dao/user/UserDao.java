@@ -5,27 +5,21 @@ import com.codemcd.tobispringwithspringboot.dao.DaoFactory;
 import com.codemcd.tobispringwithspringboot.domain.User;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserDao {
-    private final ConnectionMaker connectionMaker;
+    private DataSource dataSource;
 
-    // DaoFactory 를 활용한 의존관계 주입
-    public UserDao(ConnectionMaker connectionMaker) {
-        this.connectionMaker = connectionMaker;
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
     }
 
-    // ApplicationContext 를 활용한 의존관계 검색
-    public UserDao() {
-        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(DaoFactory.class);
-        this.connectionMaker = ac.getBean("connectionMaker", ConnectionMaker.class);
-    }
-
-    public void add(User user) throws ClassNotFoundException, SQLException {
-        Connection c = connectionMaker.makeConnection();
+    public void add(User user) throws SQLException {
+        Connection c = dataSource.getConnection();
 
         PreparedStatement ps = c.prepareStatement(
                 "INSERT INTO users(id, name, password) VALUES (?, ?, ?)");
@@ -39,8 +33,8 @@ public class UserDao {
         c.close();
     }
 
-    public User get(String id) throws ClassNotFoundException, SQLException {
-        Connection c = connectionMaker.makeConnection();
+    public User get(String id) throws SQLException {
+        Connection c = dataSource.getConnection();
 
         PreparedStatement ps = c.prepareStatement(
                 "SELECT * FROM users WHERE id = ?");
