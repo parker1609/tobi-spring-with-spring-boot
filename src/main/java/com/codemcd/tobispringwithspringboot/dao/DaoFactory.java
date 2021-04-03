@@ -11,19 +11,19 @@ public class DaoFactory {
 
     @Bean
     public UserDao userDao() {
-        return new UserDao(getConnectionMaker());
+        return new UserDao(connectionMaker());
     }
 
     public AccountDao accountDao() {
-        return new AccountDao(getConnectionMaker());
+        return new AccountDao(connectionMaker());
     }
 
     public MessageDao messageDao() {
-        return new MessageDao(getConnectionMaker());
+        return new MessageDao(connectionMaker());
     }
 
     @Bean
-    public ConnectionMaker getConnectionMaker() {
+    public ConnectionMaker connectionMaker() {
         return new DConnectionMaker();
     }
 }

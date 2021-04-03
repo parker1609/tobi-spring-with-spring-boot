@@ -3,6 +3,7 @@ package com.codemcd.tobispringwithspringboot.dao.user;
 import com.codemcd.tobispringwithspringboot.dao.ConnectionMaker;
 import com.codemcd.tobispringwithspringboot.dao.DaoFactory;
 import com.codemcd.tobispringwithspringboot.domain.User;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,10 +18,10 @@ public class UserDao {
         this.connectionMaker = connectionMaker;
     }
 
-    // DaoFactory 를 활용한 의존관계 검색
+    // ApplicationContext 를 활용한 의존관계 검색
     public UserDao() {
-        DaoFactory daoFactory = new DaoFactory();
-        this.connectionMaker = daoFactory.getConnectionMaker();
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(DaoFactory.class);
+        this.connectionMaker = ac.getBean("connectionMaker", ConnectionMaker.class);
     }
 
     public void add(User user) throws ClassNotFoundException, SQLException {
