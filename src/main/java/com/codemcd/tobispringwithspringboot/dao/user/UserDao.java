@@ -11,6 +11,7 @@ import java.sql.SQLException;
 public class UserDao {
     private final ConnectionMaker connectionMaker;
 
+    // DaoFactory 를 활용한 의존관계 주입
     public UserDao(ConnectionMaker connectionMaker) {
         this.connectionMaker = connectionMaker;
     }
