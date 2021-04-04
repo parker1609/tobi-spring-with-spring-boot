@@ -4,10 +4,13 @@ import com.codemcd.tobispringwithspringboot.dao.user.UserDao;
 import com.codemcd.tobispringwithspringboot.domain.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.sql.SQLException;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class UserDaoTest {
 
@@ -56,5 +59,16 @@ public class UserDaoTest {
 
         dao.add(user3);
         assertThat(dao.getCount()).isEqualTo(3);
+    }
+
+    @Test
+    void getUserFailure() throws SQLException {
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(DaoFactory.class);
+        UserDao dao = ac.getBean("userDao", UserDao.class);
+
+        dao.deleteAll();
+        assertThat(dao.getCount()).isEqualTo(0);
+
+        assertThrows(EmptyResultDataAccessException.class, () -> dao.get("unknown_id"));
     }
 }
