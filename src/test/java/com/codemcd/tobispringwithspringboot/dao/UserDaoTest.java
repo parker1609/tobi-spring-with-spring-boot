@@ -16,12 +16,17 @@ public class UserDaoTest {
         AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(DaoFactory.class);
 
         UserDao dao = ac.getBean("userDao", UserDao.class);
+
+        dao.deleteAll();
+        assertThat(dao.getCount()).isEqualTo(0);
+
         User user = new User();
         user.setId("gyumee");
         user.setName("박성철");
         user.setPassword("springno1");
 
         dao.add(user);
+        assertThat(dao.getCount()).isEqualTo(1);
 
         User user2 = dao.get(user.getId());
 
