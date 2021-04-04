@@ -9,7 +9,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import java.sql.SQLException;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class UserDaoTest {
@@ -71,4 +70,5 @@ public class UserDaoTest {
 
         assertThrows(EmptyResultDataAccessException.class, () -> dao.get("unknown_id"));
     }
+
 }
