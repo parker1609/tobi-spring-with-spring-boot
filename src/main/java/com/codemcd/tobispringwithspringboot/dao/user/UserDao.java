@@ -1,9 +1,6 @@
 package com.codemcd.tobispringwithspringboot.dao.user;
 
-import com.codemcd.tobispringwithspringboot.dao.ConnectionMaker;
-import com.codemcd.tobispringwithspringboot.dao.DaoFactory;
 import com.codemcd.tobispringwithspringboot.domain.User;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -52,5 +49,15 @@ public class UserDao {
         c.close();
 
         return user;
+    }
+
+    public void deleteAll() throws SQLException {
+        Connection c = dataSource.getConnection();
+
+        PreparedStatement ps = c.prepareStatement("delete from users");
+        ps.executeUpdate();
+
+        ps.close();
+        c.close();
     }
 }
