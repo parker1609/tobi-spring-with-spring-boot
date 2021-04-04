@@ -1,34 +1,31 @@
 package com.codemcd.tobispringwithspringboot.dao;
 
 import com.codemcd.tobispringwithspringboot.dao.user.UserDao;
+import com.codemcd.tobispringwithspringboot.domain.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.sql.SQLException;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class UserDaoTest {
-    public static void main(String[] args) throws ClassNotFoundException, SQLException {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DaoFactory.class);
-        UserDao userDao = context.getBean("userDao", UserDao.class);
-    }
 
     @Test
-    void list_1_20() {
-        DaoFactory daoFactory = new DaoFactory();
-        UserDao userDao1 = daoFactory.userDao();
-        UserDao userDao2 = daoFactory.userDao();
+    void addAndGet() throws SQLException {
+        AnnotationConfigApplicationContext ac = new AnnotationConfigApplicationContext(DaoFactory.class);
 
-        System.out.println(userDao1);
-        System.out.println(userDao2);
-    }
+        UserDao dao = ac.getBean("userDao", UserDao.class);
+        User user = new User();
+        user.setId("gyumee");
+        user.setName("박성철");
+        user.setPassword("springno1");
 
-    @Test
-    void list_1_21() {
-        AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DaoFactory.class);
-        UserDao userDao1 = context.getBean("userDao", UserDao.class);
-        UserDao userDao2 = context.getBean("userDao", UserDao.class);
+        dao.add(user);
 
-        System.out.println(userDao1);
-        System.out.println(userDao2);
+        User user2 = dao.get(user.getId());
+
+        assertThat(user2.getName()).isEqualTo(user.getName());
+        assertThat(user2.getPassword()).isEqualTo(user.getPassword());
     }
 }
