@@ -15,6 +15,9 @@ public class Calculator {
             }
 
             return sum;
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            throw e;
         }
     }
 }
