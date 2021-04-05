@@ -1,16 +1,9 @@
 package com.codemcd.tobispringwithspringboot.dao.user;
 
 import com.codemcd.tobispringwithspringboot.domain.User;
-import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementCreator;
-import org.springframework.jdbc.core.ResultSetExtractor;
 
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class UserDao {
     private DataSource dataSource;
@@ -32,31 +25,18 @@ public class UserDao {
                 user.getId(), user.getName(), user.getPassword());
     }
 
-    public User get(String id) throws SQLException {
-        Connection c = dataSource.getConnection();
+    public User get(String id) {
+        return this.jdbcTemplate.queryForObject("select * from users where id = ?",
+                new Object[]{id},
+                (rs, rowNum) -> {
+                    User user = new User();
+                    user.setId(rs.getString("id"));
+                    user.setName(rs.getString("name"));
+                    user.setPassword(rs.getString("password"));
 
-        PreparedStatement ps = c.prepareStatement(
-                "SELECT * FROM users WHERE id = ?");
-        ps.setString(1, id);
-
-        ResultSet rs = ps.executeQuery();
-        User user = null;
-        if (rs.next()) {
-            user = new User();
-            user.setId(rs.getString("id"));
-            user.setName(rs.getString("name"));
-            user.setPassword(rs.getString("password"));
-        }
-
-        rs.close();
-        ps.close();
-        c.close();
-
-        if (user == null) {
-            throw new EmptyResultDataAccessException(1);
-        }
-
-        return user;
+                    return user;
+                }
+        );
     }
 
     public void deleteAll() {
