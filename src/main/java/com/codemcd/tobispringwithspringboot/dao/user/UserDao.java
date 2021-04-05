@@ -64,11 +64,6 @@ public class UserDao {
     }
 
     public int getCount() {
-        final PreparedStatementCreator psCallback = con -> con.prepareStatement("select count(*) from users");
-        final ResultSetExtractor<Integer> rsCallback = rs -> {
-            rs.next();
-            return rs.getInt(1);
-        };
-        return this.jdbcTemplate.query(psCallback, rsCallback);
+        return this.jdbcTemplate.queryForObject("select count(*) from users", Integer.class);
     }
 }
