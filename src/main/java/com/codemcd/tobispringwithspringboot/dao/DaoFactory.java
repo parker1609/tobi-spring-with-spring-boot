@@ -1,5 +1,6 @@
 package com.codemcd.tobispringwithspringboot.dao;
 
+import com.codemcd.tobispringwithspringboot.dao.user.JdbcContext;
 import com.codemcd.tobispringwithspringboot.dao.user.UserDao;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +15,7 @@ public class DaoFactory {
     public UserDao userDao() {
         UserDao userDao = new UserDao();
         userDao.setDataSource(dataSource());
+        userDao.setJdbcContext(jdbcContext());
 
         return userDao;
     }
@@ -27,5 +29,13 @@ public class DaoFactory {
         dataSource.setPassword("");
 
         return dataSource;
+    }
+
+    @Bean
+    public JdbcContext jdbcContext() {
+        JdbcContext jdbcContext = new JdbcContext();
+        jdbcContext.setDataSource(dataSource());
+
+        return jdbcContext;
     }
 }
