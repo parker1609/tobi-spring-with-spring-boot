@@ -18,6 +18,12 @@ public class Calculator {
         return lineReadTemplate(filepath, multiplyCallback, 1);
     }
 
+    public String concatenate(String filepath) throws IOException {
+        LineCallback<String> concatenateCallback = (line, value) -> value + line;
+
+        return lineReadTemplate(filepath, concatenateCallback, "");
+    }
+
     public <T> T lineReadTemplate(String filepath, LineCallback<T> callback, T initVal) throws IOException {
         try (BufferedReader br = new BufferedReader(new FileReader(filepath))) {
             T res = initVal;
