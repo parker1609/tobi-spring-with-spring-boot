@@ -2,6 +2,8 @@ package com.codemcd.tobispringwithspringboot.dao.user;
 
 import com.codemcd.tobispringwithspringboot.domain.User;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCreator;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -12,8 +14,11 @@ import java.sql.SQLException;
 public class UserDao {
     private DataSource dataSource;
     private JdbcContext jdbcContext;
+    private JdbcTemplate jdbcTemplate;
 
     public void setDataSource(DataSource dataSource) {
+        this.jdbcTemplate = new JdbcTemplate(dataSource);
+
         this.dataSource = dataSource;
     }
 
@@ -21,16 +26,9 @@ public class UserDao {
         this.jdbcContext = jdbcContext;
     }
 
-    public void add(final User user) throws SQLException {
-        jdbcContext.workWithStatementStrategy(c -> {
-            PreparedStatement ps = c.prepareStatement(
-                    "INSERT INTO users(id, name, password) VALUES (?, ?, ?)");
-            ps.setString(1, user.getId());
-            ps.setString(2, user.getName());
-            ps.setString(3, user.getPassword());
-
-            return ps;
-        });
+    public void add(final User user) {
+        this.jdbcTemplate.update("INSERT INTO users(id, name, password) VALUES (?, ?, ?)",
+                user.getId(), user.getName(), user.getPassword());
     }
 
     public User get(String id) throws SQLException {
@@ -60,8 +58,8 @@ public class UserDao {
         return user;
     }
 
-    public void deleteAll() throws SQLException {
-        this.jdbcContext.executeSql("delete from users");
+    public void deleteAll() {
+        this.jdbcTemplate.update("delete from users");
     }
 
     public int getCount() throws SQLException {
