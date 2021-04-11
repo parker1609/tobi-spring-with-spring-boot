@@ -4,6 +4,7 @@ import com.codemcd.tobispringwithspringboot.dao.user.UserDao;
 import com.codemcd.tobispringwithspringboot.domain.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.sql.SQLException;
@@ -99,5 +100,13 @@ public class UserDaoTest {
         assertThat(user1.getId()).isEqualTo(user2.getId());
         assertThat(user1.getName()).isEqualTo(user2.getName());
         assertThat(user1.getPassword()).isEqualTo(user2.getPassword());
+    }
+
+    @Test
+    void duplicateKey() {
+        dao.deleteAll();
+
+        dao.add(user1);
+        assertThrows(DuplicateKeyException.class, () -> dao.add(user1));
     }
 }
