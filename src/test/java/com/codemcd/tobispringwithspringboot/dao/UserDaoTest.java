@@ -1,6 +1,6 @@
 package com.codemcd.tobispringwithspringboot.dao;
 
-import com.codemcd.tobispringwithspringboot.dao.user.UserDaoJdbc;
+import com.codemcd.tobispringwithspringboot.dao.user.UserDao;
 import com.codemcd.tobispringwithspringboot.domain.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,8 +12,8 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class UserDaoJdbcTest {
-    private UserDaoJdbc dao;
+public class UserDaoTest {
+    private UserDao dao;
     private User user1;
     private User user2;
     private User user3;

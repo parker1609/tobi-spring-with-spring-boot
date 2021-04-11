@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.RowMapper;
 import javax.sql.DataSource;
 import java.util.List;
 
-public class UserDaoJdbc {
+public class UserDaoJdbc implements UserDao {
     private JdbcTemplate jdbcTemplate;
     private RowMapper<User> userMapper = (rs, rowNum) -> {
         User user = new User();
