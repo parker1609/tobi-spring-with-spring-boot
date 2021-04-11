@@ -6,7 +6,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.support.SQLErrorCodeSQLExceptionTranslator;
+import org.springframework.jdbc.support.SQLExceptionTranslator;
 
+import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -15,6 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class UserDaoTest {
     private UserDao dao;
+    private DataSource dataSource;
+
     private User user1;
     private User user2;
     private User user3;
@@ -23,6 +28,7 @@ public class UserDaoTest {
     void setUp() {
         DaoFactory daoFactory = new DaoFactory();
         dao = daoFactory.userDao();
+        dataSource = daoFactory.dataSource();
 
         this.user1 = new User("gyumee", "박성철", "springno1");
         this.user2 = new User("leegw700", "이길월", "springno2");
@@ -108,5 +114,21 @@ public class UserDaoTest {
 
         dao.add(user1);
         assertThrows(DuplicateKeyException.class, () -> dao.add(user1));
+    }
+
+    @Test
+    void sqlExceptionTranslate() {
+        dao.deleteAll();
+
+        try {
+            dao.add(user1);
+            dao.add(user1);
+        } catch (DuplicateKeyException ex) {
+            SQLException sqlEx = (SQLException) ex.getRootCause();
+            SQLExceptionTranslator set = new SQLErrorCodeSQLExceptionTranslator(this.dataSource);
+
+            assertThat(set.translate(null, null, sqlEx))
+                    .isInstanceOf(DuplicateKeyException.class);
+        }
     }
 }
