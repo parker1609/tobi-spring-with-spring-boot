@@ -1,7 +1,7 @@
 package com.codemcd.tobispringwithspringboot.dao;
 
 import com.codemcd.tobispringwithspringboot.dao.user.JdbcContext;
-import com.codemcd.tobispringwithspringboot.dao.user.UserDao;
+import com.codemcd.tobispringwithspringboot.dao.user.UserDaoJdbc;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
@@ -12,8 +12,8 @@ import javax.sql.DataSource;
 public class DaoFactory {
 
     @Bean
-    public UserDao userDao() {
-        UserDao userDao = new UserDao();
+    public UserDaoJdbc userDao() {
+        UserDaoJdbc userDao = new UserDaoJdbc();
         userDao.setDataSource(dataSource());
 
         return userDao;
