@@ -1,6 +1,6 @@
-package com.codemcd.tobispringwithspringboot.dao.account;
+package com.codemcd.tobispringwithspringboot.account;
 
-import com.codemcd.tobispringwithspringboot.dao.ConnectionMaker;
+import com.codemcd.tobispringwithspringboot.connection.ConnectionMaker;
 
 public class AccountDao {
     private final ConnectionMaker connectionMaker;

@@ -1,6 +1,6 @@
-package com.codemcd.tobispringwithspringboot.dao.user;
+package com.codemcd.tobispringwithspringboot.user.dao;
 
-import com.codemcd.tobispringwithspringboot.domain.User;
+import com.codemcd.tobispringwithspringboot.user.domain.User;
 
 import java.util.List;
 

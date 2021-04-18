@@ -1,4 +1,4 @@
-package com.codemcd.tobispringwithspringboot.dao.user;
+package com.codemcd.tobispringwithspringboot.config;
 
 import javax.sql.DataSource;
 import java.sql.Connection;

@@ -1,6 +1,6 @@
-package com.codemcd.tobispringwithspringboot.dao.message;
+package com.codemcd.tobispringwithspringboot.message;
 
-import com.codemcd.tobispringwithspringboot.dao.ConnectionMaker;
+import com.codemcd.tobispringwithspringboot.connection.ConnectionMaker;
 
 public class MessageDao {
     private final ConnectionMaker connectionMaker;

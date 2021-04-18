@@ -1,8 +1,8 @@
-package com.codemcd.tobispringwithspringboot.dao;
+package com.codemcd.tobispringwithspringboot.user.dao;
 
-import com.codemcd.tobispringwithspringboot.dao.user.UserDao;
-import com.codemcd.tobispringwithspringboot.domain.Level;
-import com.codemcd.tobispringwithspringboot.domain.User;
+import com.codemcd.tobispringwithspringboot.config.DaoFactory;
+import com.codemcd.tobispringwithspringboot.user.domain.Level;
+import com.codemcd.tobispringwithspringboot.user.domain.User;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.dao.DuplicateKeyException;

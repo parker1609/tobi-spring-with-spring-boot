@@ -1,10 +1,10 @@
-package com.codemcd.tobispringwithspringboot.dao;
+package com.codemcd.tobispringwithspringboot.connection;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DConnectionMaker implements ConnectionMaker {
+public class NConnectionMaker implements ConnectionMaker {
 
     @Override
     public Connection makeConnection() throws ClassNotFoundException, SQLException {

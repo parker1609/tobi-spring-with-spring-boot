@@ -1,4 +1,4 @@
-package com.codemcd.tobispringwithspringboot.domain;
+package com.codemcd.tobispringwithspringboot.user.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,7 +1,7 @@
-package com.codemcd.tobispringwithspringboot.dao;
+package com.codemcd.tobispringwithspringboot.config;
 
-import com.codemcd.tobispringwithspringboot.dao.user.JdbcContext;
-import com.codemcd.tobispringwithspringboot.dao.user.UserDaoJdbc;
+import com.codemcd.tobispringwithspringboot.user.dao.UserDaoJdbc;
+import com.codemcd.tobispringwithspringboot.user.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
@@ -36,5 +36,13 @@ public class DaoFactory {
         jdbcContext.setDataSource(dataSource());
 
         return jdbcContext;
+    }
+
+    @Bean
+    public UserService userService() {
+        UserService userService = new UserService();
+        userService.setUserDao(userDao());
+
+        return userService;
     }
 }
