@@ -1,6 +1,5 @@
 package com.codemcd.tobispringwithspringboot.domain;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,4 +15,8 @@ public class User {
     private String id;
     private String name;
     private String password;
+
+    private Level level;
+    int login;
+    int recommend;
 }
