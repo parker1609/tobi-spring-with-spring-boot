@@ -53,4 +53,12 @@ public class UserDaoJdbc implements UserDao {
                 this.userMapper
         );
     }
+
+    @Override
+    public void update(User user) {
+        this.jdbcTemplate.update(
+                "UPDATE users SET name = ?, password = ?, level = ?, login = ?, recommend = ? WHERE id = ?",
+                user.getName(), user.getPassword(), user.getLevel().getValue(), user.getLogin(), user.getRecommend(),
+                user.getId());
+    }
 }
