@@ -3,9 +3,11 @@ package com.codemcd.tobispringwithspringboot.user.service;
 import com.codemcd.tobispringwithspringboot.user.dao.UserDao;
 import com.codemcd.tobispringwithspringboot.user.domain.Level;
 import com.codemcd.tobispringwithspringboot.user.domain.User;
+import lombok.Getter;
 
 import java.util.List;
 
+@Getter
 public class UserService {
     private UserDao userDao;
 
