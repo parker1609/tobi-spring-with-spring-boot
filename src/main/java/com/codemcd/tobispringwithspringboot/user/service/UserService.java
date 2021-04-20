@@ -53,7 +53,7 @@ public class UserService {
     static class TestUserService extends UserService {
         private String id;
 
-        private TestUserService(String id) {
+        public TestUserService(String id) {
             this.id = id;
         }
 

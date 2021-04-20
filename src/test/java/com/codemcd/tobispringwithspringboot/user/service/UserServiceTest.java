@@ -17,6 +17,7 @@ import java.util.List;
 import static com.codemcd.tobispringwithspringboot.user.service.UserService.MIN_LOGIN_COUNT_FOR_SILVER;
 import static com.codemcd.tobispringwithspringboot.user.service.UserService.MIN_RECOMMEND_COUNT_FOR_GOLD;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = DaoFactory.class)
@@ -86,5 +87,25 @@ public class UserServiceTest {
 
         assertThat(userWithLevelRead.getLevel()).isEqualTo(userWithLevel.getLevel());
         assertThat(userWithoutLevelRead.getLevel()).isEqualTo(userWithoutLevel.getLevel());
+    }
+
+    @Test
+    void upgradeAllOrNothing() {
+        UserService testUserService = new UserService.TestUserService(users.get(3).getId());
+        testUserService.setUserDao(this.userDao);
+
+        userDao.deleteAll();
+        for (User user : users) {
+            userDao.add(user);
+        }
+
+        try {
+            testUserService.upgradeLevels();
+            fail("TestUserServiceException exception");
+        } catch (UserService.TestUserService.TestUserServiceException e) {
+
+        }
+
+        checkLevelUpgraded(users.get(1), false);
     }
 }
