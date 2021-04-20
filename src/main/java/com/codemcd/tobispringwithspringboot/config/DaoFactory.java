@@ -1,8 +1,6 @@
 package com.codemcd.tobispringwithspringboot.config;
 
 import com.codemcd.tobispringwithspringboot.user.dao.UserDaoJdbc;
-import com.codemcd.tobispringwithspringboot.user.service.UserLevelUpgradeNormalPolicy;
-import com.codemcd.tobispringwithspringboot.user.service.UserLevelUpgradePolicy;
 import com.codemcd.tobispringwithspringboot.user.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -42,14 +40,9 @@ public class DaoFactory {
 
     @Bean
     public UserService userService() {
-        UserService userService = new UserService(userLevelUpgradeNormalPolicy());
+        UserService userService = new UserService();
         userService.setUserDao(userDao());
 
         return userService;
-    }
-
-    @Bean
-    public UserLevelUpgradePolicy userLevelUpgradeNormalPolicy() {
-        return new UserLevelUpgradeNormalPolicy();
     }
 }

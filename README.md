@@ -10,17 +10,13 @@
 - Lombok
 
 
-## 차이점
-- Spring 3.1 -> Spring 5.2.8 + Spring boot 2.3.3
-    - Spring Boot Starter Dependency 사용
+## 차이점 정리
+- Spring 3.1 -> Spring 5.2.8
+- Spring Boot Starter Dependency 사용
 - MySQL -> H2
-- JUnit4 -> JUnit5
+- JUnit4 -> JUit5
 - Lombok 라이브러리 사용
 - 익명 클래스 -> 람다식
-
-
-## 추가사항
-- UserLevelUpgradePolicy 인터페이스 분리 (p348)
 
 
 ## 참고자료
