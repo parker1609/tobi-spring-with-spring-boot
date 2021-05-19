@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import javax.sql.DataSource;
 import java.util.Arrays;
 import java.util.List;
 
@@ -22,8 +23,12 @@ import static org.assertj.core.api.Assertions.fail;
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = DaoFactory.class)
 public class UserServiceTest {
+
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private DataSource dataSource;
 
     private UserDao userDao;
     private List<User> users;
@@ -93,6 +98,7 @@ public class UserServiceTest {
     void upgradeAllOrNothing() throws Exception {
         UserService testUserService = new UserService.TestUserService(users.get(3).getId());
         testUserService.setUserDao(this.userDao);
+        testUserService.setDataSource(this.dataSource);
 
         userDao.deleteAll();
         for (User user : users) {
