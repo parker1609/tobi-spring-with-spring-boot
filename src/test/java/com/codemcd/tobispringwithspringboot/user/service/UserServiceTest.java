@@ -47,7 +47,7 @@ public class UserServiceTest {
     }
 
     @Test
-    void upgradeLevels() {
+    void upgradeLevels() throws Exception {
         userDao.deleteAll();
         for (User user : users) {
             userDao.add(user);
@@ -90,7 +90,7 @@ public class UserServiceTest {
     }
 
     @Test
-    void upgradeAllOrNothing() {
+    void upgradeAllOrNothing() throws Exception {
         UserService testUserService = new UserService.TestUserService(users.get(3).getId());
         testUserService.setUserDao(this.userDao);
 
