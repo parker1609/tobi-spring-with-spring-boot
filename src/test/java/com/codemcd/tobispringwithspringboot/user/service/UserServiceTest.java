@@ -95,7 +95,7 @@ public class UserServiceTest {
     }
 
     @Test
-    void upgradeAllOrNothing() throws Exception {
+    void upgradeAllOrNothing() {
         UserService testUserService = new UserService.TestUserService(users.get(3).getId());
         testUserService.setUserDao(this.userDao);
         testUserService.setDataSource(this.dataSource);
