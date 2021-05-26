@@ -38,11 +38,11 @@ public class UserServiceTest {
         userDao = userService.getUserDao();
 
         users = Arrays.asList(
-                new User("bumjin", "박범진", "p1", Level.BASIC, MIN_LOGIN_COUNT_FOR_SILVER - 1, 0),
-                new User("joytouch", "강명성", "p2", Level.BASIC, MIN_LOGIN_COUNT_FOR_SILVER, 0),
-                new User("erwins", "신승한", "p3", Level.SILVER, 60, MIN_RECOMMEND_COUNT_FOR_GOLD - 1),
-                new User("madnite1", "이상호", "p4", Level.SILVER, 60, MIN_RECOMMEND_COUNT_FOR_GOLD),
-                new User("green", "오민규", "p5", Level.GOLD, 100, Integer.MAX_VALUE)
+                new User("bumjin", "bumjin@spring.io", "박범진", "p1", Level.BASIC, MIN_LOGIN_COUNT_FOR_SILVER - 1, 0),
+                new User("joytouch", "joytouch@spring.io", "강명성", "p2", Level.BASIC, MIN_LOGIN_COUNT_FOR_SILVER, 0),
+                new User("erwins", "erwins@spring.io", "신승한", "p3", Level.SILVER, 60, MIN_RECOMMEND_COUNT_FOR_GOLD - 1),
+                new User("madnite1", "madnite1@spring.io", "이상호", "p4", Level.SILVER, 60, MIN_RECOMMEND_COUNT_FOR_GOLD),
+                new User("green", "green@spring.io", "오민규", "p5", Level.GOLD, 100, Integer.MAX_VALUE)
         );
     }
 

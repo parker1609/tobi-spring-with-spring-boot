@@ -31,13 +31,13 @@ public class UserDaoTest {
         dao = daoFactory.userDao();
         dataSource = daoFactory.dataSource();
 
-        this.user1 = new User("gyumee", "박성철", "springno1", Level.BASIC, 1, 0);
-        this.user2 = new User("leegw700", "이길월", "springno2", Level.SILVER, 55, 10);
-        this.user3 = new User("bumjin", "박범진", "springno3", Level.GOLD, 100, 40);
+        this.user1 = new User("gyumee", "gyumee@spring.io", "박성철", "springno1", Level.BASIC, 1, 0);
+        this.user2 = new User("leegw700", "leegw700@spring.io","이길월", "springno2", Level.SILVER, 55, 10);
+        this.user3 = new User("bumjin", "bumjin@spring.io","박범진", "springno3", Level.GOLD, 100, 40);
     }
 
     @Test
-    void addAndGet() throws SQLException {
+    void addAndGet() {
         dao.deleteAll();
         assertThat(dao.getCount()).isEqualTo(0);
 
@@ -53,7 +53,7 @@ public class UserDaoTest {
     }
 
     @Test
-    void count() throws SQLException {
+    void count() {
         dao.deleteAll();
         assertThat(dao.getCount()).isEqualTo(0);
 
@@ -68,7 +68,7 @@ public class UserDaoTest {
     }
 
     @Test
-    void getUserFailure() throws SQLException {
+    void getUserFailure() {
         dao.deleteAll();
         assertThat(dao.getCount()).isEqualTo(0);
 
