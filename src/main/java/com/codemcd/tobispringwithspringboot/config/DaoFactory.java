@@ -1,9 +1,12 @@
 package com.codemcd.tobispringwithspringboot.config;
 
 import com.codemcd.tobispringwithspringboot.user.dao.UserDaoJdbc;
+import com.codemcd.tobispringwithspringboot.user.service.DummyMailSender;
 import com.codemcd.tobispringwithspringboot.user.service.UserService;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.mail.MailSender;
@@ -48,11 +51,18 @@ public class DaoFactory {
     }
 
     @Bean
+    @Primary
     public MailSender mailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost("mail.server.com");
 
         return mailSender;
+    }
+
+    @Bean
+    @Qualifier("testMailSender")
+    public MailSender testMailSender() {
+        return new DummyMailSender();
     }
 
     @Bean

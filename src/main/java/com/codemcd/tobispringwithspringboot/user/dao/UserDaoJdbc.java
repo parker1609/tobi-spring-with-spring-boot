@@ -28,7 +28,7 @@ public class UserDaoJdbc implements UserDao {
     }
 
     public void add(final User user) {
-        this.jdbcTemplate.update("INSERT INTO users(id, name, email, password, level, login, recommend) " +
+        this.jdbcTemplate.update("INSERT INTO users(id, email, name, password, level, login, recommend) " +
                         "VALUES (?, ?, ?, ?, ?, ?, ?)",
                 user.getId(), user.getEmail(), user.getName(), user.getPassword()
                 , user.getLevel().intValue(), user.getLogin(), user.getRecommend());
@@ -58,7 +58,7 @@ public class UserDaoJdbc implements UserDao {
     @Override
     public void update(User user) {
         this.jdbcTemplate.update(
-                "UPDATE users SET email = ?. name = ?, password = ?, level = ?, login = ?, recommend = ? WHERE id = ?",
+                "UPDATE users SET email = ?, name = ?, password = ?, level = ?, login = ?, recommend = ? WHERE id = ?",
                 user.getEmail(), user.getName(), user.getPassword(),
                 user.getLevel().intValue(), user.getLogin(), user.getRecommend(),
                 user.getId());
